@@ -25,7 +25,7 @@ public:
   bool Remove(int i, T &x);
   bool IsEmpty() const;
   bool IsFull() const;
-  void Sort();
+  void Sort(){};
   void Input_Front();
   void Input_End();
   void Output();

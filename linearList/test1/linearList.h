@@ -14,7 +14,8 @@ public:
   virtual bool Remove(int i, T &x) = 0;
   virtual bool IsEmpty() const = 0;
   virtual bool IsFull() const = 0;
-  //virtual void Sort() = 0;
-  virtual void Input() = 0;
+  virtual void Sort() = 0;
+  virtual void Input_Front() = 0;
+  virtual void Input_End() = 0;
   virtual void Output() = 0;
 };

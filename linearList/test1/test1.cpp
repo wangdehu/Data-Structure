@@ -26,6 +26,7 @@ int main()
 
     std::cout << d << " 's pos is " << MyList->Search(d) << std::endl;
     MyList->Insert(4, e);
+    MyList->Output();
     MyList->Remove(3, temp);
     MyList->Output();
     MyList->~SeqList();
