@@ -15,13 +15,12 @@ class DblList
 
   public:
     DblList();
-    DblList(const T &x);
     DblList(DblList<T> &L);
     ~DblList();
     void makeEmpty();
     int Length() const;
     DblNode<T> *getHead() const;
-    DblNode<T> *Search(T &x) const;
+    int Search(T &x) const;
     DblNode<T> *Locate(int i) const;
     bool getData(int i, T &x) const;
     void setData(int i, T &x);
@@ -40,11 +39,6 @@ template <class T>
 DblList<T>::DblList()
 {
     first = new DblNode<T>;
-}
-template <class T>
-DblList<T>::DblList(const T &x)
-{
-    first = new DblNode<T>(x);
 }
 template <class T>
 DblList<T>::DblList(DblList<T> &L)
@@ -96,18 +90,29 @@ DblNode<T> *DblList<T>::getHead() const
     return first;
 }
 template <class T>
-DblNode<T> *DblList<T>::Search(T &x) const
+int DblList<T>::Search(T &x) const
 {
-
+    int i = 1;
+    bool flag = true;
     DblNode<T> *current = first->rLink;
     while (current != nullptr)
     {
         if (current->data == x)
+        {
+            flag = false;
             break;
+        }
         else
+        {
             current = current->rLink;
+            i++;
+        }
     }
-    return current;
+    if (flag)
+    {
+        return -1;
+    }
+    return i;
 }
 template <class T>
 DblNode<T> *DblList<T>::Locate(int i) const
@@ -249,7 +254,7 @@ void DblList<T>::Output()
     int cou = 1;
     while (current != nullptr)
     {
-        std::cout << "#" << cou++; << ":" << current->data << std::endl;
+        std::cout << "#" << cou++ << ":" << current->data << std::endl;
         current = current->rLink;
     }
 }

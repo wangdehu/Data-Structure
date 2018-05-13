@@ -22,13 +22,12 @@ protected:
 
 public:
   List();
-  List(const T &x);
   List(List<T> &L);
   ~List();
   void makeEmpty();
   int Length() const;
   LinkNode<T> *getHead() const;
-  LinkNode<T> *Search(T &x) const;
+  int Search(T &x) const;
   LinkNode<T> *Locate(int i) const;
   bool getData(int i, T &x) const;
   void setData(int i, T &x);
@@ -47,11 +46,6 @@ template <class T>
 List<T>::List()
 {
   first = new LinkNode<T>;
-}
-template <class T>
-List<T>::List(const T &x)
-{
-  first = new LinkNode<T>(x);
 }
 template <class T>
 List<T>::List(List<T> &L)
@@ -102,18 +96,29 @@ LinkNode<T> *List<T>::getHead() const
   return first;
 }
 template <class T>
-LinkNode<T> *List<T>::Search(T &x) const
+int List<T>::Search(T &x) const
 {
-
+  int i = 1;
+  bool flag = true;
   LinkNode<T> *current = first->link;
   while (current != nullptr)
   {
     if (current->data == x)
+    {
+      flag = false;
       break;
+    }
     else
+    {
       current = current->link;
+      i++;
+    }
   }
-  return current;
+  if (flag)
+  {
+    return -1;
+  }
+  return i;
 }
 template <class T>
 LinkNode<T> *List<T>::Locate(int i) const

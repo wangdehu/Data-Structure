@@ -12,24 +12,38 @@
 #include "List.h"
 int main()
 {
+    std::cout << "please input some integer, if you input -1 ,it will be end!" << std::endl;
     int a = 1, b = 2, c = 3, d = 4, e = 5, f = 6;
     List<int> *l = new List<int>;
     l->Input_End(-1);
     l->Output();
     std::cout << "list's length is " << l->Length() << std::endl;
+    if (l->IsEmpty())
+    {
+        std::cout << "this list is empty!!" << std::endl;
+    }
+    else
+    {
+        std::cout << "this list is not empty !!" << std::endl;
+    }
     int temp;
     l->getData(3, temp);
     std::cout << "list's #3 is " << temp << std::endl;
-    LinkNode<int> *temp2 = l->Search(d);
-    if (temp2 == nullptr)
+    int temp2 = l->Search(d);
+    if (temp2 == -1)
     {
         std::cout << "the " << d << " not found!" << std::endl;
     }
     else
     {
-        std::cout << "the " << d << "'s pos is " << temp2->data << std::endl;
+        std::cout << "the " << d << "'s pos is " << temp2 << std::endl;
     }
-    l->Insert(4, f);
-    l->Output();
+
+    if (l->Length() >= 3)
+    {
+        std::cout << "insert a value " << f << " in 4 pos !" << std::endl;
+        l->Insert(3, f);
+        l->Output();
+    }
     l->~List();
 }

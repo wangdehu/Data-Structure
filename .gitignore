@@ -1,2 +1,4 @@
 *.exe
 *.o
+.vscode/settings.json
+zout.txt

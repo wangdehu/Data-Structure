@@ -1,9 +1,8 @@
-#include "linearList.h"
 #include <iostream>
 #include <cstdlib>
 const int defaultSize = 100;
 template <class T>
-class SeqList : public LinearList<T>
+class SeqList
 {
 protected:
   T *data;
