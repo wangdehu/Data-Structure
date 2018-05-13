@@ -32,7 +32,7 @@ class CircList
     CircLinkNode<T> *Locate(int i) const;
     bool getData(int i, T &x) const;
     void setData(int i, T &x);
-    bool Insert(int i, T &x);
+    bool Insert(int i, T x);
     bool Remove(int i, T &x);
     bool IsEmpty() const;
     bool IsFull() const;
@@ -164,12 +164,15 @@ void CircList<T>::setData(int i, T &x)
     }
 }
 template <class T>
-bool CircList<T>::Insert(int i, T &x)
+bool CircList<T>::Insert(int i, T x)
 {
     CircLinkNode<T> *current = Locate(i);
-
-    if (current == nullptr)
+    if (i != 0 && current == nullptr)
+    {
         return false;
+    }
+    if (i == 0)
+        current = first;
     CircLinkNode<T> *newNode = new CircLinkNode<T>(x);
     if (newNode == nullptr)
     {

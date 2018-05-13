@@ -24,7 +24,7 @@ class DblList
     DblNode<T> *Locate(int i) const;
     bool getData(int i, T &x) const;
     void setData(int i, T &x);
-    bool Insert(int i, T &x);
+    bool Insert(int i, T x);
     bool Remove(int i, T &x);
     bool IsEmpty() const;
     bool IsFull() const;
@@ -157,12 +157,15 @@ void DblList<T>::setData(int i, T &x)
     }
 }
 template <class T>
-bool DblList<T>::Insert(int i, T &x)
+bool DblList<T>::Insert(int i, T x)
 {
     DblNode<T> *current = Locate(i);
-
-    if (current == nullptr)
+    if (i != 0 && current == nullptr)
+    {
         return false;
+    }
+    if (i == 0)
+        current = first;
     DblNode<T> *newNode = new DblNode<T>(x);
     if (newNode == nullptr)
     {

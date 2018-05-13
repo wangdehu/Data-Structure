@@ -20,7 +20,7 @@ public:
   Locate(int i) const;
   bool getData(int i, T &x) const;
   void setData(int i, T &x);
-  bool Insert(int i, T &x);
+  bool Insert(int i, T x);
   bool Remove(int i, T &x);
   bool IsEmpty() const;
   bool IsFull() const;
@@ -119,7 +119,7 @@ void SeqList<T>::setData(int i, T &x)
     data[i - 1] = x;
 }
 template <class T>
-bool SeqList<T>::Insert(int i, T &x)
+bool SeqList<T>::Insert(int i, T x)
 {
   if (last == maxSize - 1)
   {

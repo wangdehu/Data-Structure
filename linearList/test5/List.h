@@ -124,7 +124,9 @@ template <class T>
 LinkNode<T> *List<T>::Locate(int i) const
 {
   if (i <= 0)
+  {
     return nullptr;
+  }
   LinkNode<T> *current = first;
   int k = 0;
   while (current != nullptr && k < i)
@@ -165,6 +167,7 @@ void List<T>::setData(int i, T &x)
 template <class T>
 bool List<T>::Insert(int i, T x)
 {
+
   LinkNode<T> *current = Locate(i);
   if (i != 0 && current == nullptr)
   {
