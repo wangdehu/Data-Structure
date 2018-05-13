@@ -19,21 +19,39 @@ int main()
     l->Output();
 
     std::cout << "CircList's length is " << l->Length() << std::endl;
+    if (l->IsEmpty())
+    {
+        std::cout << "DblList is empty!" << std::endl;
+    }
+    else
+    {
+        std::cout << "DblList is not empty!" << std::endl;
+    }
     int temp;
     l->getData(3, temp);
     std::cout << "CircList's #3 is " << temp << std::endl;
-    CircLinkNode<int> *temp2 = l->Search(d);
-    if (temp2 == nullptr)
+
+    int temp2 = l->Search(d);
+    if (temp2 == -1)
     {
         std::cout << "the " << d << " not found!" << std::endl;
     }
     else
     {
-        std::cout << "the " << d << "'s pos is " << temp2->data << std::endl;
+        std::cout << "the " << d << "'s pos is " << temp2 << std::endl;
     }
-    l->Insert(4, f);
-    l->Output();
-    l->Remove(3, temp);
-    l->Output();
+
+    if (l->Length() >= 3)
+    {
+        std::cout << "insert a value " << f << " in 4 pos !" << std::endl;
+        l->Insert(3, f);
+        l->Output();
+    }
+    if (l->Length() >= 3)
+    {
+        std::cout << "remove pos 3 's  value " << std::endl;
+        l->Remove(3, f);
+        l->Output();
+    }
     l->~CircList();
 }

@@ -22,14 +22,13 @@ class CircList
 
   public:
     CircList();
-    CircList(const T &x);
     CircList(CircList<T> &L);
     ~CircList();
     void makeEmpty();
     int Length() const;
     CircLinkNode<T> *getHead() const;
     bool setHead(int &i) const;
-    CircLinkNode<T> *Search(T &x) const;
+    int Search(T &x) const;
     CircLinkNode<T> *Locate(int i) const;
     bool getData(int i, T &x) const;
     void setData(int i, T &x);
@@ -48,12 +47,6 @@ template <class T>
 CircList<T>::CircList()
 {
     first = new CircLinkNode<T>;
-    first->link = first;
-}
-template <class T>
-CircList<T>::CircList(const T &x)
-{
-    first = new CircLinkNode<T>(x);
     first->link = first;
 }
 template <class T>
@@ -86,7 +79,6 @@ void CircList<T>::makeEmpty()
         first->link = q->link;
         delete q;
     }
-    delete first;
 }
 template <class T>
 int CircList<T>::Length() const
@@ -106,18 +98,29 @@ CircLinkNode<T> *CircList<T>::getHead() const
     return first;
 }
 template <class T>
-CircLinkNode<T> *CircList<T>::Search(T &x) const
+int CircList<T>::Search(T &x) const
 {
-
+    int i = 1;
+    bool flag = true;
     CircLinkNode<T> *current = first->link;
     while (current != first)
     {
         if (current->data == x)
-            return current;
+        {
+            flag = false;
+            break;
+        }
         else
+        {
             current = current->link;
+            i++;
+        }
     }
-    return nullptr;
+    if (flag)
+    {
+        return -1;
+    }
+    return i;
 }
 template <class T>
 CircLinkNode<T> *CircList<T>::Locate(int i) const
