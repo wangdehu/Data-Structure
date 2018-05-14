@@ -135,6 +135,10 @@ bool SeqList<T>::Insert(int i, T x)
   }
   data[i] = x;
   last++;
+  if (!last)
+  {
+    last++;
+  }
   return true;
 }
 template <class T>

@@ -32,6 +32,8 @@ void listsort(List<T> *l, T tag)
     {
         l->Insert(cnt++, l2->Locate(i)->data);
     }
+    delete l1;
+    delete l2;
 }
 int main()
 {
