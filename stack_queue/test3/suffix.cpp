@@ -54,6 +54,7 @@ string postfix(const string &exp)
     // cout << "ch==" << ch << endl;
     string out;
     int num = -1;
+
     while (1)
     {
         S.getTop(tmp);
@@ -66,14 +67,14 @@ string postfix(const string &exp)
         if (ch >= '0' && ch <= '9')
         {
             out += ch;
-            // cout << ch << endl;
+            // cout << tmp << endl;
+            // out += ' ';
             ch = exp[cnt++];
-            // if (cnt == len + 1)
-            //     break;
         }
         else
         {
             S.getTop(op);
+            out += ' ';
             if (icp(ch) > isp(op))
             {
                 S.Push(ch);
@@ -109,12 +110,75 @@ string postfix(const string &exp)
     }
     return out;
 }
+int suffix_value(string suffix)
+{
+    int len = suffix.size();
+    while (suffix[0] == ' ')
+    {
+        suffix.erase(suffix.begin(), suffix.begin() + 1);
+    }
+    int i, j;
+    char op;
+    int stack[1000];
+    int top = 0, value = 0;
+    for (i = 0; suffix[i] != '\0'; i++)
+    {
+        if (suffix[i] >= '0' && suffix[i] <= '9')
+        {
+            value = value * 10 + suffix[i] - '0';
+        }
+        else if (suffix[i] == ' ')
+        {
+            if ((suffix[i - 1] != ' '))
+            {
+                // cout << "add " << top << "   " << value << endl;
+                stack[top++] = value;
+                value = 0;
+            }
+        }
+        else
+        {
+            switch (suffix[i])
+            {
+            case '+':
+                // cout << "xxxxxxxxxxxxxx " << top << endl;
+
+                // cout << "1. " << stack[top - 2] << "   2.   " << stack[top - 1] << endl;
+
+                value = stack[top - 2] + stack[top - 1];
+                // cout << "hhh" << endl;
+                break;
+            case '-':
+                value = stack[top - 2] - stack[top - 1];
+                break;
+            case '*':
+                // cout << "xxxxxxxxxxxxxx " << top << endl;
+                value = stack[top - 2] * stack[top - 1];
+                // cout << "1. " << stack[top - 2] << "   2.   " << stack[top - 1] << endl;
+                // cout << "???" << value << endl;
+                break;
+            case '/':
+                value = stack[top - 2] / stack[top - 1];
+                break;
+            default:
+                break;
+            }
+            top -= 2;
+            // cout << "sub???" << endl;
+            // stack[top] = value;
+            // cout << "top==" << top << "   value==" << value << endl;
+            // ;
+        }
+    }
+    return stack[0];
+}
 int main()
 {
     string str;
-    // cin >> str;
-    str = "(1+2)*3";
+    str = "(13+2)*3";
     string m = postfix(str);
     cout << m << endl;
+    // string x="13 2+ "
+    cout << suffix_value(m);
     return 0;
 }
