@@ -8,7 +8,6 @@
 //      6xxxxxxx
 //	用栈求解下图所示迷宫的所有路径，并输出最短路径长度及该最短路径。
 #include <bits/stdc++.h>
-#include <stack>
 using namespace std;
 typedef pair<int, int> point;
 const int inf = 0x3f3f3f3f;
