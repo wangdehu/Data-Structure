@@ -175,7 +175,7 @@ int suffix_value(string suffix)
 int main()
 {
     string str;
-    str = "(13+2)*3";
+    str = "(13+2)*3-2-2*3";
     string m = postfix(str);
     cout << m << endl;
     // string x="13 2+ "
