@@ -1,4 +1,4 @@
-// 借助栈实现单链表上的逆置运算
+// 1.（1）借助栈实现单链表上的逆置运算
 #include <iostream>
 #include "simpleList.h"
 using namespace std;

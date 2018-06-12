@@ -1,3 +1,6 @@
+//2.	已知一棵树的前序遍历序列和中序遍历序列，试构造这棵二叉树，以P248的5.18验证。
+//  先序：ABECDFGHIJ
+//  中序：EBCDAFHIGJ
 #include <bits/stdc++.h>
 #include "binaryTree.h"
 using namespace std;

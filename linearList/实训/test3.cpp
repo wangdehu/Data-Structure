@@ -1,4 +1,4 @@
-//实现两个多项式相加运算。
+//3.实现两个多项式相加运算。
 #include <iostream>
 #include "List.h"
 using namespace std;

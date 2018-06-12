@@ -1,4 +1,4 @@
-//实现两个多项式相加运算。
+//5.约瑟夫环
 #include <iostream>
 #include "CircList.h"
 using namespace std;
