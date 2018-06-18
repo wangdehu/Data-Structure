@@ -1,7 +1,6 @@
 // 题目四：编写一个算法，实现求带权连通图中最小生成树的Prim算法（必做）和Kruskal算法（选做），对于如图三所示的带权连通图，输出从顶点V1出发的一棵最小生成树。
 
-#include <iostream>
-#include <cstring>
+#include <bits/stdc++.h>
 using namespace std;
 int ad[2000][2000];
 const int maxn = 999999999;

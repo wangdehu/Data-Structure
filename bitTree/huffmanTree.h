@@ -9,13 +9,8 @@ struct HuffmanTreeNode
     T pos;
     int value;
     HuffmanTreeNode<T> *lchild, *rchild;
-    HuffmanTreeNode(int value, bool flag = false) : value(value), flag(flag) {}
-
-    HuffmanTreeNode(T pos, int value, bool flag = true) : pos(pos), value(value), flag(flag) {}
-    // bool operator<(const HuffmanTreeNode &other) const
-    // {
-    //     return value < other.value;
-    // }
+    HuffmanTreeNode(int value, bool flag = false) : value(value), flag(flag), lchild(nullptr), rchild(nullptr) {}
+    HuffmanTreeNode(T pos, int value, bool flag = true) : pos(pos), value(value), flag(flag), lchild(nullptr), rchild(nullptr) {}
 };
 template <class T>
 struct compare
@@ -35,22 +30,28 @@ class HuffmanTree
     std::map<T, std::string> res;
 
   public:
-    HuffmanTree()
-    {
-    }
+    HuffmanTree() {}
     ~HuffmanTree();
-
-    // CreateBystring(string str);
-    double averLen()
+    double Lenall(HuffmanTreeNode<T> *tmp)
     {
-        int cnt = res.size();
-        double tot = 0;
-        for (auto i : res)
+        if (tmp == nullptr)
         {
-            tot += i.second.size();
+            std::cout << "???" << std::endl;
+            return 0;
         }
-        double r = double(tot) / cnt;
-        return r;
+        if (tmp->lchild == nullptr && tmp->rchild == nullptr)
+        {
+            return (tmp->value) * (res[tmp->pos].size());
+        }
+        double tot = 0;
+        if (tmp->lchild != nullptr)
+        {
+            // cout << Lenall(tmp->lchild) << endl;
+            tot += Lenall(tmp->lchild);
+        }
+        if (tmp->rchild != nullptr)
+            tot += Lenall(tmp->rchild);
+        return tot;
     }
     HuffmanTreeNode<T> *getRoot() const
     {
@@ -66,10 +67,6 @@ class HuffmanTree
         }
     }
 };
-// template <class T>
-// HuffmanTree::HuffmanTree()
-// {
-// }
 template <class T>
 HuffmanTree<T>::~HuffmanTree()
 {
@@ -91,8 +88,6 @@ void HuffmanTree<T>::CreateBYWordsAndValue()
     int num;
     std::cout << "please input the num of words" << std::endl;
     std::cin >> num;
-    // std::priority_queue<Node*, std::vector<Node*>, compare> q;
-
     std::priority_queue<HuffmanTreeNode<T> *, std::vector<HuffmanTreeNode<T> *>, compare<T>> P;
     T word;
     int value;
@@ -103,12 +98,11 @@ void HuffmanTree<T>::CreateBYWordsAndValue()
     }
     while (P.size() > 1)
     {
-        // std::cout << P.size() << std::endl;
         HuffmanTreeNode<T> *ptr1 = P.top();
         P.pop();
         HuffmanTreeNode<T> *ptr2 = P.top();
         P.pop();
-        std::cout << " ptr1->valu==" << ptr1->value << "   ptr2->value==  " << ptr2->value << std::endl;
+        // std::cout << " ptr1->valu==" << ptr1->value << "   ptr2->value==  " << ptr2->value << std::endl;
         int tot = ptr1->value;
         tot += ptr2->value;
         HuffmanTreeNode<T> *tmp = new HuffmanTreeNode<T>(tot);
@@ -122,27 +116,17 @@ void HuffmanTree<T>::CreateBYWordsAndValue()
 template <class T>
 void HuffmanTree<T>::encode(HuffmanTreeNode<T> *tmp, std::string s)
 {
-    std::cout << "111" << std::endl;
     if (tmp == nullptr)
     {
-        std::cout << "1112" << std::endl;
-
         return;
     }
-    std::cout << "112" << std::endl;
-
-    bool f1 = tmp->lchild == nullptr ? true : false;
-    bool f2 = tmp->rchild == nullptr ? true : false;
-    std::cout << "113" << std::endl;
+    // bool f1 = tmp->lchild == nullptr ? true : false;
+    // bool f2 = tmp->rchild == nullptr ? true : false;
     if (tmp->flag)
     {
         res[tmp->pos] = s;
-        std::cout << "uuu" << std::endl;
         return;
     }
-    std::cout << "114" << std::endl;
     encode(tmp->lchild, s + '0');
-    std::cout << "115" << std::endl;
     encode(tmp->rchild, s + '1');
-    std::cout << "116" << std::endl;
 }

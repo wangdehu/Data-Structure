@@ -1,4 +1,5 @@
 //5.约瑟夫环
+// n为个数 m为报数间隔
 #include <iostream>
 #include "CircList.h"
 using namespace std;
@@ -6,18 +7,18 @@ int main()
 {
     CircList<int> *l = new CircList<int>;
     int n, m, s;
-    cout << "please input n,m,s" << endl;
-    cin >> n >> m >> s;
+    cout << "please input n,m" << endl;
+    cin >> n >> m;
     int cnt = 0;
-    for (int i = 1; i <= n; ++i)
+    for (int i = n; i >= 1; --i)
     {
-        l->Insert(cnt++, i);
+        l->Insert(0, i);
     }
     CircLinkNode<int> *pre = l->getHead();
     CircLinkNode<int> *first = l->getHead();
-    while (m--)
+    for (int i = 0; i < n - 1; ++i)
     {
-        int tmp = s;
+        int tmp = m;
         while (tmp--)
         {
             pre = pre->link;

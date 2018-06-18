@@ -1,6 +1,7 @@
-// 利用栈对只含二目运算符的中缀算术表达式求值，
-//并将该中缀表达式转换为后缀表达式。
+//将该中缀表达式转换为后缀表达式求值
 //算术运算符包括： *、/、+、- ，优先级从高到低。
+
+//样例: (13+2)*3-2-2*3
 #include <iostream>
 #include "SeqStack.h"
 using namespace std;
@@ -14,7 +15,6 @@ int isp(char &c)
         return 1;
     case '*':
     case '/':
-    case '%':
         return 5;
     case '+':
     case '-':
@@ -51,15 +51,11 @@ string postfix(const string &exp)
     int len = exp.size();
     int cnt = 0;
     ch = exp[cnt++];
-    // cout << "ch==" << ch << endl;
     string out;
     int num = -1;
-
     while (1)
     {
         S.getTop(tmp);
-        // cout << tmp << endl;
-        // cout << ch << endl;
         if (ch == '#' && tmp == '#')
         {
             break;
@@ -67,8 +63,6 @@ string postfix(const string &exp)
         if (ch >= '0' && ch <= '9')
         {
             out += ch;
-            // cout << tmp << endl;
-            // out += ' ';
             ch = exp[cnt++];
         }
         else
@@ -78,11 +72,7 @@ string postfix(const string &exp)
             if (icp(ch) > isp(op))
             {
                 S.Push(ch);
-                // cout << "111  " << ch << endl;
                 ch = exp[cnt++];
-                // if (cnt == len + 1)
-                //     break;
-                // cout << "222  " << ch << endl;
             }
             else if (icp(ch) < isp(op))
             {
@@ -92,8 +82,6 @@ string postfix(const string &exp)
                     break;
                 }
                 out += tmp;
-
-                //  cout << tmp << endl;
             }
             else
             {
@@ -102,8 +90,6 @@ string postfix(const string &exp)
                 if (tmp == '(')
                 {
                     ch = exp[cnt++];
-                    // if (cnt == len + 1)
-                    //     break;/
                 }
             }
         }
@@ -131,7 +117,6 @@ int suffix_value(string suffix)
         {
             if ((suffix[i - 1] != ' '))
             {
-                // cout << "add " << top << "   " << value << endl;
                 stack[top++] = value;
                 value = 0;
             }
@@ -141,33 +126,25 @@ int suffix_value(string suffix)
             switch (suffix[i])
             {
             case '+':
-                // cout << "xxxxxxxxxxxxxx " << top << endl;
-
-                // cout << "1. " << stack[top - 2] << "   2.   " << stack[top - 1] << endl;
-
                 value = stack[top - 2] + stack[top - 1];
-                // cout << "hhh" << endl;
+                cout << stack[top - 2] << "+" << stack[top - 1] << "==" << value << endl;
                 break;
             case '-':
                 value = stack[top - 2] - stack[top - 1];
+                cout << stack[top - 2] << "-" << stack[top - 1] << "==" << value << endl;
                 break;
             case '*':
-                // cout << "xxxxxxxxxxxxxx " << top << endl;
                 value = stack[top - 2] * stack[top - 1];
-                // cout << "1. " << stack[top - 2] << "   2.   " << stack[top - 1] << endl;
-                // cout << "???" << value << endl;
+                cout << stack[top - 2] << "*" << stack[top - 1] << "==" << value << endl;
                 break;
             case '/':
                 value = stack[top - 2] / stack[top - 1];
+                cout << stack[top - 2] << "/" << stack[top - 1] << "==" << value << endl;
                 break;
             default:
                 break;
             }
             top -= 2;
-            // cout << "sub???" << endl;
-            // stack[top] = value;
-            // cout << "top==" << top << "   value==" << value << endl;
-            // ;
         }
     }
     return stack[0];
@@ -175,10 +152,9 @@ int suffix_value(string suffix)
 int main()
 {
     string str;
-    str = "(13+2)*3-2-2*3";
+    cin >> str;
     string m = postfix(str);
     cout << m << endl;
-    // string x="13 2+ "
-    cout << suffix_value(m);
+    cout << "res: " << suffix_value(m);
     return 0;
 }

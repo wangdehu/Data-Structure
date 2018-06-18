@@ -1,6 +1,6 @@
 //写一个程序，利用KMP算法求子串t在主串是中出现的次数.
 //并以s=”aaabbdaabbde”,t=“aabbd”为例，显示其匹配过程。（匹配过程的显示选做）。
-
+//    aaabbdaabbde   aabbd
 #include <iostream>
 using namespace std;
 const int N = 1e5 + 10;
@@ -30,7 +30,6 @@ int match(string S, string P)
         cout << "p[" << k << "]==" << P[k] << endl;
         cout << "S[" << j << "]==" << S[j] << endl
              << endl;
-
         if (k == -1 || S[j] == P[k])
         {
             j++, k++;
@@ -50,8 +49,8 @@ int match(string S, string P)
 }
 int main()
 {
-    string S = "aaabbdaabbde";
-    string P = "aabbd";
+    string S, P;
+    cin >> S >> P;
     getNext(P);
     cout << "result : " << match(S, P);
     return 0;
