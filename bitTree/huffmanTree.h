@@ -102,7 +102,6 @@ void HuffmanTree<T>::CreateBYWordsAndValue()
         P.pop();
         HuffmanTreeNode<T> *ptr2 = P.top();
         P.pop();
-        // std::cout << " ptr1->valu==" << ptr1->value << "   ptr2->value==  " << ptr2->value << std::endl;
         int tot = ptr1->value;
         tot += ptr2->value;
         HuffmanTreeNode<T> *tmp = new HuffmanTreeNode<T>(tot);
@@ -120,8 +119,6 @@ void HuffmanTree<T>::encode(HuffmanTreeNode<T> *tmp, std::string s)
     {
         return;
     }
-    // bool f1 = tmp->lchild == nullptr ? true : false;
-    // bool f2 = tmp->rchild == nullptr ? true : false;
     if (tmp->flag)
     {
         res[tmp->pos] = s;

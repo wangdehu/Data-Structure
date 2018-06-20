@@ -2,6 +2,7 @@
 //算术运算符包括： *、/、+、- ，优先级从高到低。
 
 //样例: (13+2)*3-2-2*3
+
 #include <iostream>
 #include "SeqStack.h"
 using namespace std;
